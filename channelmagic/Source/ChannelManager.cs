@@ -115,10 +115,25 @@ namespace ChannelMagic.Source
 
         public static void playChannel(bool isMediaEnding = false) {
 
-            if (isMediaEnding)
-                currentScheduleItem = channels[currentChannel - 1].ScheduleList.FirstOrDefault(x => x.StartTime >= DateTime.Now && x.EndTime > DateTime.Now);
-            else
-                currentScheduleItem = channels[currentChannel - 1].ScheduleList.FirstOrDefault(x => x.StartTime >= DateTime.Now && x.EndTime > DateTime.Now);
+            //if (isMediaEnding)
+            //    currentScheduleItem = channels[currentChannel - 1].ScheduleList.FirstOrDefault(x => x.StartTime <= DateTime.Now && x.EndTime > DateTime.Now);
+            //else
+            //    currentScheduleItem = channels[currentChannel - 1].ScheduleList.FirstOrDefault(x => x.StartTime <= DateTime.Now && x.EndTime > DateTime.Now);
+
+            currentScheduleItem = null;
+            DateTime now = DateTime.Now.AddSeconds(1);
+            foreach (ScheduleItemModel item in channels[currentChannel - 1].ScheduleList) {
+
+                // Assuming you know d2 > d1
+                if (now.Ticks > item.StartTime.Ticks && now.Ticks < item.EndTime.Ticks) {
+                    // targetDt is in between d1 and d2
+                    currentScheduleItem = item;
+                    break;
+                }   
+            }
+
+             
+
 
             currentShow = mediaTvShowItems.FirstOrDefault(x => x.MediaId == currentScheduleItem.MediaId);
 
