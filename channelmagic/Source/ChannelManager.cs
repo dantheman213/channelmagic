@@ -72,10 +72,11 @@ namespace ChannelMagic.Source
                         channel.ScheduleList.Add(item);
                     }
 
-                    nowTime = currentTime;
+                    
                 }
 
                 channels.Add(channel);
+                nowTime = currentTime;
             }
         }
 
