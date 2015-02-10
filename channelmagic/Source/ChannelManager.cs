@@ -56,7 +56,7 @@ namespace ChannelMagic.Source
                 for (int k = 0; k < 100; k++) {
                     TvShowItemModel show = getRandomTvShow();
 
-                    if (show.Duration.TotalMinutes > 0 && show.Season > 0 && show.Episode > 0) {
+                    if (show.Duration.TotalMinutes > 0 && !String.IsNullOrEmpty(show.FilePath)) {
                         ScheduleItemModel item = new ScheduleItemModel();
                         item.MediaId = show.MediaId;
                         item.ChannelId = channel.ChannelId;
@@ -65,7 +65,11 @@ namespace ChannelMagic.Source
                         item.StartTime = nowTime;
                         item.EndTime = nowTime.AddSeconds(show.Duration.TotalSeconds);
                         item.Title = show.FileName;
-                        item.SubTitle = String.Format("Season {0} Episode {1}", show.Season, show.Episode);
+
+                        if (show.Season > 0 && show.Episode > 0) {
+                            item.SubTitle = String.Format("Season {0} Episode {1}", show.Season, show.Episode);
+
+                        }
 
                         nowTime = nowTime.AddSeconds(show.Duration.TotalSeconds + 1);
 
