@@ -107,13 +107,23 @@ namespace ChannelMagic.Source
                     currentChannel--;
 
                     playChannel();
+                } else {
+                    // go to the bottom of the list
+                    currentChannel = channels.Count;
+                    playChannel();
                 }
+
             } else if (direction == "down") {
 
                 if (currentChannel < channels.Count) {
                     currentChannel++;
 
                     playChannel();
+                } else {
+                    // go back to the top
+                    currentChannel = 1;
+                    playChannel();
+
                 }
             } 
         }
