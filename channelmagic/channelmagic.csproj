@@ -83,6 +83,7 @@
     <Compile Include="Models\ChannelModel.cs" />
     <Compile Include="Models\MediaStateInfoModel.cs" />
     <Compile Include="Models\MonitorInfoModel.cs" />
+    <Compile Include="Models\MovieItemModel.cs" />
     <Compile Include="Models\ScheduleItemModel.cs" />
     <Compile Include="Models\TvMetaDataModel.cs" />
     <Compile Include="Models\TvShowItemModel.cs" />

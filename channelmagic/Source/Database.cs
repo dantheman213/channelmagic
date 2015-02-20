@@ -86,6 +86,48 @@ namespace ChannelMagic.Source
             return items;
         }
 
+        public static bool addMovieItem(MovieItemModel item)
+        {
+
+            try
+            {
+
+                string mediaDuration = ((item.Duration != null) ? String.Format("{0}:{1}:{2}", item.Duration.Hours.ToString(), item.Duration.Minutes.ToString(), item.Duration.Seconds.ToString()) : "");
+                string title = ((!String.IsNullOrEmpty(item.MovieName)) ? MySQLEscape(item.MovieName) : "");
+                string bitrate = ((!String.IsNullOrEmpty(item.BitRate)) ? item.BitRate.ToString() : "");
+                string framesize = ((!String.IsNullOrEmpty(item.FrameSize)) ? MySQLEscape(item.FrameSize) : "");
+                string filename = ((!String.IsNullOrEmpty(item.FileName)) ? MySQLEscape(item.FileName) : "");
+                string fileextension = ((!String.IsNullOrEmpty(item.FileExtension)) ? MySQLEscape(item.FileExtension) : "");
+                string filepath = ((!String.IsNullOrEmpty(item.FilePath)) ? MySQLEscape(item.FilePath) : "");
+                string filetype = ((!String.IsNullOrEmpty(item.FileType)) ? MySQLEscape(item.FileType) : "");
+                string dateadded = DateTime.Now.ToString("MM-dd-yyyy HH:mm:ss");
+
+                string sql = String.Format("INSERT INTO cm_movies (Title, Duration, BitRate, FrameSize, FileName, FileExtension, FilePath, FileType, DateAdded) VALUES ('{0}', {1}, {2}, {3}, '{4}', '{5}', '{6}', '{7}', '{8}')",
+                    title,
+                    mediaDuration,
+                    bitrate,
+                    framesize,
+                    filename,
+                    fileextension,
+                    filepath,
+                    filetype,
+                    dateadded
+                );
+
+                SQLiteCommand statement = new SQLiteCommand(db);
+                statement.CommandText = sql;
+                statement.ExecuteNonQuery();
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+            return false;
+        }
+
         public static bool addTvShowItem(TvShowItemModel item) {
 
             try {

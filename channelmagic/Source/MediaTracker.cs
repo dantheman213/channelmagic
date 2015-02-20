@@ -12,6 +12,70 @@ namespace ChannelMagic.Source
 {
     public static class MediaTracker
     {
+        public static void addMovieMedia(string mediaPath)
+        {
+
+            List<string> files = App.findMediaFilesInDirectory(mediaPath);
+
+            if (files != null && files.Count > 0)
+            {
+
+                foreach (string file in files)
+                {
+
+                    //if (!Database.checkTvShowMediaPathExists(file))
+                    //{
+                        addMovieItem(file);
+                    //}
+
+                }
+
+                ChannelManager.mediaTvShowItems = Database.getTvShowsList();
+            }
+        }
+
+        public static void addMovieItem(string path) {
+            MovieItemModel item = new MovieItemModel();
+
+            int startIndex = path.LastIndexOf('\\') + 1;
+            item.FileName = path.Substring(startIndex, (path.LastIndexOf('.') - startIndex));
+            item.FileExtension = path.Substring(path.LastIndexOf('.') + 1);
+            item.DateAdded = DateTime.Now;
+            item.FilePath = path;
+
+
+            string name = item.FileName;
+            name = name.Replace('-', ' ').Replace('.', ' ');
+
+            int startCheck = name.IndexOf('[');
+            int endCheck = name.IndexOf(']');
+
+            if (startCheck > -1 && endCheck > -1 && startCheck < endCheck)
+            {
+                name = name.Substring(startCheck, (endCheck - startCheck));
+
+            }
+
+            try
+            {
+
+                TagLib.File.Create(path);
+                TagLib.File tagFile = TagLib.File.Create(path);
+
+
+                item.Duration = tagFile.Properties.Duration;
+                item.FileType = tagFile.Properties.Description;
+                item.FrameSize = String.Format("{0}x{1}", tagFile.Properties.VideoWidth, tagFile.Properties.VideoHeight);
+                item.BitRate = tagFile.Properties.BitsPerSample.ToString();
+            }
+            catch (Exception ex)
+            {
+
+                Console.WriteLine(ex.Message);
+            }
+
+
+        }
 
         public static void addTvShowMedia(string mediaPath) {
 
