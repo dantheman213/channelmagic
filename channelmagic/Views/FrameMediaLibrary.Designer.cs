@@ -33,22 +33,31 @@
             this.columnRating = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnBitRate = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnDuration = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnSeason = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnEpisode = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnFrameSize = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnDateAdded = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnFilePath = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tabMovies = new System.Windows.Forms.TabPage();
             this.buttonSave = new System.Windows.Forms.Button();
             this.dialogDirectoryBrowse = new System.Windows.Forms.FolderBrowserDialog();
-            this.columnSeason = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnEpisode = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.listMovies = new System.Windows.Forms.ListView();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader9 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.buttonAddMovies = new System.Windows.Forms.Button();
             this.tabControls.SuspendLayout();
             this.tabPageTvShows.SuspendLayout();
+            this.tabMovies.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControls
             // 
             this.tabControls.Controls.Add(this.tabPageTvShows);
-            this.tabControls.Controls.Add(this.tabPage2);
+            this.tabControls.Controls.Add(this.tabMovies);
             this.tabControls.Location = new System.Drawing.Point(12, 38);
             this.tabControls.Name = "tabControls";
             this.tabControls.SelectedIndex = 0;
@@ -115,6 +124,14 @@
             this.columnDuration.Text = "Duration";
             this.columnDuration.Width = 71;
             // 
+            // columnSeason
+            // 
+            this.columnSeason.Text = "Season";
+            // 
+            // columnEpisode
+            // 
+            this.columnEpisode.Text = "Episode";
+            // 
             // columnFrameSize
             // 
             this.columnFrameSize.Text = "Frame Size";
@@ -130,15 +147,17 @@
             this.columnFilePath.Text = "File Path";
             this.columnFilePath.Width = 503;
             // 
-            // tabPage2
+            // tabMovies
             // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1092, 542);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "tabPage2";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.tabMovies.Controls.Add(this.buttonAddMovies);
+            this.tabMovies.Controls.Add(this.listMovies);
+            this.tabMovies.Location = new System.Drawing.Point(4, 22);
+            this.tabMovies.Name = "tabMovies";
+            this.tabMovies.Padding = new System.Windows.Forms.Padding(3);
+            this.tabMovies.Size = new System.Drawing.Size(1092, 542);
+            this.tabMovies.TabIndex = 1;
+            this.tabMovies.Text = "Movies";
+            this.tabMovies.UseVisualStyleBackColor = true;
             // 
             // buttonSave
             // 
@@ -149,13 +168,60 @@
             this.buttonSave.Text = "Save";
             this.buttonSave.UseVisualStyleBackColor = true;
             // 
-            // columnSeason
+            // listMovies
             // 
-            this.columnSeason.Text = "Season";
+            this.listMovies.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1,
+            this.columnHeader3,
+            this.columnHeader4,
+            this.columnHeader7,
+            this.columnHeader8,
+            this.columnHeader9});
+            this.listMovies.Location = new System.Drawing.Point(3, 6);
+            this.listMovies.Name = "listMovies";
+            this.listMovies.Size = new System.Drawing.Size(1078, 495);
+            this.listMovies.TabIndex = 1;
+            this.listMovies.UseCompatibleStateImageBehavior = false;
+            this.listMovies.View = System.Windows.Forms.View.Details;
             // 
-            // columnEpisode
+            // columnHeader1
             // 
-            this.columnEpisode.Text = "Episode";
+            this.columnHeader1.Text = "Title";
+            this.columnHeader1.Width = 237;
+            // 
+            // columnHeader3
+            // 
+            this.columnHeader3.Text = "BitRate";
+            // 
+            // columnHeader4
+            // 
+            this.columnHeader4.Text = "Duration";
+            this.columnHeader4.Width = 71;
+            // 
+            // columnHeader7
+            // 
+            this.columnHeader7.Text = "Frame Size";
+            this.columnHeader7.Width = 72;
+            // 
+            // columnHeader8
+            // 
+            this.columnHeader8.Text = "Date Added";
+            this.columnHeader8.Width = 121;
+            // 
+            // columnHeader9
+            // 
+            this.columnHeader9.Text = "File Path";
+            this.columnHeader9.Width = 503;
+            // 
+            // buttonAddMovies
+            // 
+            this.buttonAddMovies.Location = new System.Drawing.Point(1006, 507);
+            this.buttonAddMovies.Name = "buttonAddMovies";
+            this.buttonAddMovies.Size = new System.Drawing.Size(75, 23);
+            this.buttonAddMovies.TabIndex = 2;
+            this.buttonAddMovies.Text = "Add Movies";
+            this.buttonAddMovies.UseVisualStyleBackColor = true;
+            this.buttonAddMovies.Click += new System.EventHandler(this.buttonAddMovies_Click);
             // 
             // FrameMediaLibrary
             // 
@@ -174,6 +240,7 @@
             this.Load += new System.EventHandler(this.FrameMediaLibrary_Load);
             this.tabControls.ResumeLayout(false);
             this.tabPageTvShows.ResumeLayout(false);
+            this.tabMovies.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -184,7 +251,7 @@
         private System.Windows.Forms.TabPage tabPageTvShows;
         private System.Windows.Forms.Button buttonAddTvShows;
         private System.Windows.Forms.ListView listTvShows;
-        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TabPage tabMovies;
         private System.Windows.Forms.Button buttonSave;
         private System.Windows.Forms.FolderBrowserDialog dialogDirectoryBrowse;
         private System.Windows.Forms.ColumnHeader columnTitle;
@@ -196,5 +263,13 @@
         private System.Windows.Forms.ColumnHeader columnFilePath;
         private System.Windows.Forms.ColumnHeader columnSeason;
         private System.Windows.Forms.ColumnHeader columnEpisode;
+        private System.Windows.Forms.ListView listMovies;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
+        private System.Windows.Forms.ColumnHeader columnHeader3;
+        private System.Windows.Forms.ColumnHeader columnHeader4;
+        private System.Windows.Forms.ColumnHeader columnHeader7;
+        private System.Windows.Forms.ColumnHeader columnHeader8;
+        private System.Windows.Forms.ColumnHeader columnHeader9;
+        private System.Windows.Forms.Button buttonAddMovies;
     }
 }

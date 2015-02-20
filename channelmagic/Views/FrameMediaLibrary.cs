@@ -56,11 +56,29 @@ namespace ChannelMagic.Views
 
         private void FrameMediaLibrary_Load(object sender, EventArgs e) {
             listTvShows.FullRowSelect = true;
+            listMovies.FullRowSelect = true;
             refreshTvShowListView();
         }
 
         private void listTvShows_SelectedIndexChanged(object sender, EventArgs e) {
 
+        }
+
+        private void buttonAddMovies_Click(object sender, EventArgs e)
+        {
+            //dialogDirectoryBrowse.RootFolder = Environment.SpecialFolder.MyComputer;
+
+            // TBD remove
+            dialogDirectoryBrowse.SelectedPath = "C:\\Users\\Dan\\Videos";
+
+            if (dialogDirectoryBrowse.ShowDialog() == DialogResult.OK)
+            {
+
+                MediaTracker.addMovieMedia(dialogDirectoryBrowse.SelectedPath);
+                MessageBox.Show("Complete!", "Operation Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //refreshTvShowListView();
+
+            }
         }
     }
 }
