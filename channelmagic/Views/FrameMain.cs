@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Input;
 
 using ChannelMagic.Source;
 using ChannelMagic.Views;
@@ -14,10 +15,9 @@ using ChannelMagic.Models;
 
 using WMPLib;
 
-namespace ChannelMagic.Views
-{
-    public partial class FrameMain : Form
-    {
+namespace ChannelMagic.Views {
+
+    public partial class FrameMain : Form {
         private Point oldLocation;
 
         private short bMouseClickCount = 0;
@@ -45,6 +45,8 @@ namespace ChannelMagic.Views
             labelMediaSubtitle.Text = ChannelManager.currentScheduleItem.SubTitle;
             labelChannelName.Text = ChannelManager.currentScheduleItem.ChannelName;
             labelChannelNumber.Text = (ChannelManager.currentScheduleItem.ChannelId + 1).ToString();
+
+            labelChannelName.Left = this.Width = labelChannelName.Width - 15;
 
             labelMediaTitle.Visible = true;
             labelMediaSubtitle.Visible = true;
@@ -80,7 +82,7 @@ namespace ChannelMagic.Views
 
             mediaPlayer.closedCaption.SAMIFileName = "";
 
-            if(ChannelManager.mediaTvShowItems.Count > 0)
+            if (ChannelManager.mediaTvShowItems.Count > 0)
                 ChannelManager.playInitialVideo();
 
             frameControls = new FrameMediaControls();
@@ -204,6 +206,8 @@ namespace ChannelMagic.Views
                 //this.Height = monitor.Dimensions.Height;
 
                 timerCheckFocus.Enabled = true;
+                Cursor.Hide();
+
             } else {
                 timerCheckFocus.Enabled = false;
 
@@ -220,6 +224,7 @@ namespace ChannelMagic.Views
                 App.showWinTaskbar(true);
 
                 this.Focus();
+                Cursor.Show();
             }
 
             FrameMain_Resize(null, null);
@@ -313,6 +318,34 @@ namespace ChannelMagic.Views
 
         private void playPauseToolStripMenuItem_Click(object sender, EventArgs e) {
             ChannelManager.playPause();
+        }
+
+        private void mediaPlayer_KeyDownEvent(object sender, AxWMPLib._WMPOCXEvents_KeyDownEvent e) {
+
+            switch (e.nKeyCode) {
+                case (short)Keys.Space:
+                    ChannelManager.playPause();
+                    break;
+            
+                case (short)Keys.Up:
+                    ChannelManager.changeChannel("up");
+                    break;
+                
+                case (short)Keys.Down:
+                    ChannelManager.changeChannel("down");
+                    break;
+
+                case (short)Keys.Left:
+                    mediaPlayer.Ctlcontrols.currentPosition -= 15;
+                    break;
+
+                case (short)Keys.Right:
+                    mediaPlayer.Ctlcontrols.currentPosition += 15;
+                    break;
+                
+                default:
+                    break;
+            }
         }
 
 

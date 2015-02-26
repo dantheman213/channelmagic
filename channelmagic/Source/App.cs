@@ -11,6 +11,7 @@ using ChannelMagic.Models;
 using System.Runtime.InteropServices;
 using Microsoft.Win32;
 using System.Diagnostics;
+using System.Security.Cryptography;
 
 
 namespace ChannelMagic.Source
@@ -31,6 +32,8 @@ namespace ChannelMagic.Source
         private const int SW_SHOW = 1;
         // *** end *** \\
 
+        private static readonly RNGCryptoServiceProvider _generator = new RNGCryptoServiceProvider();
+
 
         public static AppSettingsModel settings = null;
         private static List<MonitorInfoModel> monitorInfo = null;
@@ -38,7 +41,6 @@ namespace ChannelMagic.Source
         private static Random rand = null;
 
         public static void init() {
-            rand = new Random();
 
             settings = new AppSettingsModel();
             // TBD load app data
@@ -96,13 +98,19 @@ namespace ChannelMagic.Source
 
 
         public static string getApplicationExePath() {
-            string path = getApplicationPath() + "ChannelMagic.exe";
+            string path = getApplicationPath() + "channelmagic.exe";
             return path;
         }
 
         public static int generateRandomNumber(int min, int max) {
-            
-            return rand.Next(min, max);
+
+            RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider();
+            byte[] buffer = new byte[4];
+
+            rng.GetBytes(buffer);
+            int result = BitConverter.ToInt32(buffer, 0);
+
+            return new Random(result).Next(min, max);
         }
 
         public static List<string> findMediaFilesInDirectory(string sDir) {

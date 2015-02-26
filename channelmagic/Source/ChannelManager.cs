@@ -43,10 +43,10 @@ namespace ChannelMagic.Source
 
             DateTime currentTime = DateTime.Now;
             DateTime nowTime = currentTime;
-            string[] networks = { "ABC", "NBC", "FOX", "FX", "UPN", "HBO", "ShoTime", "Cinemax", "Starz", "SciFi" };
+            string[] networks = { "ABC", "NBC", "FOX", "FX", "UPN", "HBO", "ShoTime", "Cinemax", "Starz", "SciFi", "ESPN", "CW", "PBS", "MTV", "MTV2", "Discovery", "Science", "CineHD", "SMX", "HGTV", "Disney", "HSN", "USA", "TNT", "Comedy Centeral", "History Channel", "H2", "TLC", "APL" };
 
             ChannelModel channel = null;
-            for (int i = 0; i < 10; i++) {
+            for (int i = 0; i < 29; i++) {
                 channel = new ChannelModel();
 
                 channel.ChannelId = i + 1000;

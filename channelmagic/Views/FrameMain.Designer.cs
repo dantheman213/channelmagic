@@ -71,6 +71,7 @@
             this.mediaPlayer.TabIndex = 0;
             this.mediaPlayer.PlayStateChange += new AxWMPLib._WMPOCXEvents_PlayStateChangeEventHandler(this.mediaPlayer_PlayStateChange);
             this.mediaPlayer.ClickEvent += new AxWMPLib._WMPOCXEvents_ClickEventHandler(this.mediaPlayer_ClickEvent);
+            this.mediaPlayer.KeyDownEvent += new AxWMPLib._WMPOCXEvents_KeyDownEventHandler(this.mediaPlayer_KeyDownEvent);
             this.mediaPlayer.MouseMoveEvent += new AxWMPLib._WMPOCXEvents_MouseMoveEventHandler(this.mediaPlayer_MouseMoveEvent);
             this.mediaPlayer.Enter += new System.EventHandler(this.mediaPlayer_Enter);
             // 
@@ -280,11 +281,12 @@
             this.labelChannelName.BackColor = System.Drawing.Color.Black;
             this.labelChannelName.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelChannelName.ForeColor = System.Drawing.Color.White;
-            this.labelChannelName.Location = new System.Drawing.Point(928, 41);
+            this.labelChannelName.Location = new System.Drawing.Point(916, 41);
             this.labelChannelName.Name = "labelChannelName";
             this.labelChannelName.Size = new System.Drawing.Size(166, 25);
             this.labelChannelName.TabIndex = 4;
             this.labelChannelName.Text = "[Channel Name]";
+            this.labelChannelName.TextAlign = System.Drawing.ContentAlignment.TopRight;
             this.labelChannelName.Visible = false;
             // 
             // labelChannelNumber
