@@ -46,7 +46,7 @@ namespace ChannelMagic.Views {
             labelChannelName.Text = ChannelManager.currentScheduleItem.ChannelName;
             labelChannelNumber.Text = (ChannelManager.currentScheduleItem.ChannelId + 1).ToString();
 
-            labelChannelName.Left = this.Width = labelChannelName.Width - 15;
+            labelChannelName.Left = this.Width - labelChannelName.Width - 15;
 
             labelMediaTitle.Visible = true;
             labelMediaSubtitle.Visible = true;
